@@ -24,8 +24,15 @@ const pick = (obj, key) => {
   }
 };
 
+const sortDistinct = array => {
+  return array
+    .filter((value, index, self) => self.indexOf(value) === index)
+    .sort((a, b) => a > b);
+};
+
 module.exports = {
   tableToDictList,
   filterArray,
-  pick
+  pick,
+  sortDistinct
 };
