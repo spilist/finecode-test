@@ -8,6 +8,11 @@ const tableToDictList = table => {
   );
 };
 
+const filterArray = (array, predicate) => {
+  return array.filter(predicate);
+};
+
 module.exports = {
-  tableToDictList
+  tableToDictList,
+  filterArray
 };
