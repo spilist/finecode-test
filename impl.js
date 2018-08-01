@@ -30,9 +30,14 @@ const sortDistinct = array => {
     .sort((a, b) => a > b);
 };
 
+const sortBy = (array, prop, compareFunc) => {
+  return array.sort((obj1, obj2) => compareFunc(obj1[prop], obj2[prop]));
+};
+
 module.exports = {
   tableToDictList,
   filterArray,
   pick,
-  sortDistinct
+  sortDistinct,
+  sortBy
 };
