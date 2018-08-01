@@ -27,11 +27,13 @@ const pick = (obj, key) => {
 const sortDistinct = array => {
   return array
     .filter((value, index, self) => self.indexOf(value) === index)
-    .sort((a, b) => a > b);
+    .sort((a, b) => (a > b ? 1 : -1));
 };
 
 const sortBy = (array, prop, compareFunc) => {
-  return array.sort((obj1, obj2) => compareFunc(obj1[prop], obj2[prop]));
+  return array.sort(
+    (obj1, obj2) => (compareFunc(obj1[prop], obj2[prop]) ? 1 : -1)
+  );
 };
 
 const multiply = (a, b) => a * b;
@@ -48,6 +50,21 @@ const calc = (functionName, ...params) => {
   return this[functionName](...params);
 };
 
+const findDeepestChild = tree => {
+  const depthCount = [];
+  const pushCount = (obj, count) => {
+    count += 1;
+    for (let key in obj) {
+      depthCount.push({ name: key, count });
+      if (obj[key] instanceof Object) {
+        pushCount(obj[key], count);
+      }
+    }
+  };
+  pushCount(tree, 0);
+  return depthCount.sort((a, b) => (a.count < b.count ? 1 : -1))[0].name;
+};
+
 module.exports = {
   tableToDictList,
   filterArray,
@@ -55,5 +72,6 @@ module.exports = {
   sortDistinct,
   sortBy,
   calc,
-  multiply
+  multiply,
+  findDeepestChild
 };
