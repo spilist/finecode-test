@@ -17,7 +17,10 @@ const pick = (obj, key) => {
     if (prop === key) {
       return obj[prop];
     } else if (obj[prop] instanceof Object) {
-      return pick(obj[prop], key);
+      const result = pick(obj[prop], key);
+      if (result) {
+        return result;
+      }
     } else {
       continue;
     }
@@ -79,20 +82,8 @@ const findNodesContaningMoreThan = (tree, count) => {
   return nodes.filter(node => node.count >= count).map(node => node.name);
 };
 
-const _pick2 = (obj, key) => {
-  for (let prop in obj) {
-    if (prop === key) {
-      return obj[prop];
-    } else if (obj[prop] instanceof Object) {
-      _pick2(obj[prop], key);
-    } else {
-      continue;
-    }
-  }
-};
-
 const countAllChildren = (tree, key) => {
-  const obj = _pick2(tree, key);
+  const obj = pick(tree, key);
   let count = 0;
 
   const childrenCount = obj => {
