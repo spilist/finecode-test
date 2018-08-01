@@ -65,6 +65,20 @@ const findDeepestChild = tree => {
   return depthCount.sort((a, b) => (a.count < b.count ? 1 : -1))[0].name;
 };
 
+const findNodesContaningMoreThan = (tree, count) => {
+  const nodes = [];
+  const childrenCount = obj => {
+    for (let key in obj) {
+      if (obj[key] instanceof Object) {
+        nodes.push({ name: key, count: Object.keys(obj[key]).length });
+      }
+      childrenCount(obj[key]);
+    }
+  };
+  childrenCount(tree);
+  return nodes.filter(node => node.count >= count).map(node => node.name);
+};
+
 module.exports = {
   tableToDictList,
   filterArray,
@@ -73,5 +87,6 @@ module.exports = {
   sortBy,
   calc,
   multiply,
-  findDeepestChild
+  findDeepestChild,
+  findNodesContaningMoreThan
 };
