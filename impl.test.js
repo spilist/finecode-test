@@ -103,7 +103,7 @@ describe("sortDistinct(array)", () => {
   });
 });
 
-describe("sortBy(array, property, isReverse)", () => {
+describe("sortBy(array, property, compareFunc)", () => {
   it("sorts by object property", () => {
     class Voucher {
       constructor(trader, amount) {
@@ -119,7 +119,7 @@ describe("sortBy(array, property, isReverse)", () => {
       new Voucher("이마트", 80000)
     ];
 
-    const vouchers = impl.sortBy(data, "amount", true);
+    const vouchers = impl.sortBy(data, "amount", (a, b) => a < b);
     expect(vouchers[0].trader).toBe("신세계");
     expect(vouchers[3].trader).toBe("7 Eleven");
   });
