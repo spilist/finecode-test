@@ -34,10 +34,26 @@ const sortBy = (array, prop, compareFunc) => {
   return array.sort((obj1, obj2) => compareFunc(obj1[prop], obj2[prop]));
 };
 
+const multiply = (a, b) => a * b;
+const divide = (a, b) => a / b;
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+
+this.multiply = multiply.bind(this);
+this.divide = divide.bind(this);
+this.add = add.bind(this);
+this.subtract = subtract.bind(this);
+
+const calc = (functionName, ...params) => {
+  return this[functionName](...params);
+};
+
 module.exports = {
   tableToDictList,
   filterArray,
   pick,
   sortDistinct,
-  sortBy
+  sortBy,
+  calc,
+  multiply
 };

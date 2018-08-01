@@ -125,7 +125,7 @@ describe("sortBy(array, property, compareFunc)", () => {
   });
 });
 
-describe("calc(functionName, params)", () => {
+describe("calc(functionName, ...params)", () => {
   it("apply function call by name with params", () => {
     expect(impl.calc("multiply", 6, 3)).toBe(18);
     expect(impl.multiply(6, 3)).toBe(18);
