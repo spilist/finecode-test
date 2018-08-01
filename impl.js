@@ -79,6 +79,22 @@ const findNodesContaningMoreThan = (tree, count) => {
   return nodes.filter(node => node.count >= count).map(node => node.name);
 };
 
+const countAllChildren = (tree, key) => {
+  const obj = pick(tree, key);
+  let count = 0;
+
+  const childrenCount = obj => {
+    for (let key in obj) {
+      count += 1;
+      if (obj[key] instanceof Object) {
+        childrenCount(obj[key]);
+      }
+    }
+  };
+  childrenCount(obj);
+  return count;
+};
+
 module.exports = {
   tableToDictList,
   filterArray,
@@ -88,5 +104,6 @@ module.exports = {
   calc,
   multiply,
   findDeepestChild,
-  findNodesContaningMoreThan
+  findNodesContaningMoreThan,
+  countAllChildren
 };
