@@ -84,7 +84,7 @@ const _pick2 = (obj, key) => {
     if (prop === key) {
       return obj[prop];
     } else if (obj[prop] instanceof Object) {
-      pick(obj[prop], key);
+      _pick2(obj[prop], key);
     } else {
       continue;
     }
