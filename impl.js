@@ -17,7 +17,7 @@ const pick = (obj, key) => {
     if (prop === key) {
       return obj[prop];
     } else if (obj[prop] instanceof Object) {
-      return pick(obj[prop], key);
+      pick(obj[prop], key);
     } else {
       continue;
     }
