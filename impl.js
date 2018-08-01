@@ -17,7 +17,7 @@ const pick = (obj, key) => {
     if (prop === key) {
       return obj[prop];
     } else if (obj[prop] instanceof Object) {
-      pick(obj[prop], key);
+      return pick(obj[prop], key);
     } else {
       continue;
     }
@@ -79,8 +79,20 @@ const findNodesContaningMoreThan = (tree, count) => {
   return nodes.filter(node => node.count >= count).map(node => node.name);
 };
 
+const _pick2 = (obj, key) => {
+  for (let prop in obj) {
+    if (prop === key) {
+      return obj[prop];
+    } else if (obj[prop] instanceof Object) {
+      pick(obj[prop], key);
+    } else {
+      continue;
+    }
+  }
+};
+
 const countAllChildren = (tree, key) => {
-  const obj = pick(tree, key);
+  const obj = _pick2(tree, key);
   let count = 0;
 
   const childrenCount = obj => {
@@ -95,6 +107,37 @@ const countAllChildren = (tree, key) => {
   return count;
 };
 
+class Message {
+  constructor(params) {
+    this.userId = params.userId;
+    this.content = params.content;
+  }
+}
+
+class Notice extends Message {
+  constructor(content) {
+    super({ userId: 0, content });
+  }
+}
+
+const renderMessage = (array, params) => {
+  const currentUserId = params.userId;
+
+  return array
+    .map(item => {
+      if (item.userId === 0) {
+        return `<li class="notice">${item.content}</li>`;
+      } else {
+        const className = item.userId === currentUserId ? "right" : "left";
+
+        return `<li class="${className}"><img class="profile" src="{{user_image(${
+          item.userId
+        })}}"><div class="message-content">${item.content}</div></li>`;
+      }
+    })
+    .join("\n");
+};
+
 module.exports = {
   tableToDictList,
   filterArray,
@@ -105,5 +148,8 @@ module.exports = {
   multiply,
   findDeepestChild,
   findNodesContaningMoreThan,
-  countAllChildren
+  countAllChildren,
+  Notice,
+  Message,
+  renderMessage
 };
