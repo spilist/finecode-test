@@ -12,7 +12,20 @@ const filterArray = (array, predicate) => {
   return array.filter(predicate);
 };
 
+const pick = (obj, key) => {
+  for (let prop in obj) {
+    if (prop === key) {
+      return obj[prop];
+    } else if (obj[prop] instanceof Object) {
+      return pick(obj[prop], key);
+    } else {
+      continue;
+    }
+  }
+};
+
 module.exports = {
   tableToDictList,
-  filterArray
+  filterArray,
+  pick
 };
