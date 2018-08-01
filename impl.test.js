@@ -58,7 +58,7 @@ describe("tableToDictList(table)", () => {
 describe("filterArray(array, predicate)", () => {
   it("only filters which matches for predicate", () => {
     const data = lodash.range(0, 100);
-    const filtered = impl.filterArray(data, num => num % 3);
+    const filtered = impl.filterArray(data, num => num % 3 === 0);
     filtered.forEach(num => {
       expect(num % 3).toBe(0);
     });
