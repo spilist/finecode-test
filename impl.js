@@ -12,12 +12,12 @@ const filterMultipleOfThree = array => {
   return array.filter(num => num % 3 === 0);
 };
 
-const pick = (obj, key) => {
+const _pick = (obj, key) => {
   for (let prop in obj) {
     if (prop === key) {
       return obj[prop];
     } else if (obj[prop] instanceof Object) {
-      const result = pick(obj[prop], key);
+      const result = _pick(obj[prop], key);
       if (result) {
         return result;
       }
@@ -25,6 +25,11 @@ const pick = (obj, key) => {
       continue;
     }
   }
+};
+
+const pickGlossTerm = jsonStr => {
+  const json = JSON.parse(jsonStr);
+  return _pick(json, "GlossTerm");
 };
 
 const sortDistinct = array => {
@@ -83,7 +88,7 @@ const findNodesContaningMoreThan = (tree, count) => {
 };
 
 const countAllChildren = (tree, key) => {
-  const obj = pick(tree, key);
+  const obj = _pick(tree, key);
   let count = 0;
 
   const childrenCount = obj => {
@@ -132,7 +137,7 @@ const renderMessage = (array, params) => {
 module.exports = {
   tableToDictList,
   filterMultipleOfThree,
-  pick,
+  pickGlossTerm,
   sortDistinct,
   sortBy,
   calc,
