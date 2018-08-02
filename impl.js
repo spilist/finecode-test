@@ -8,8 +8,8 @@ const tableToDictList = table => {
   );
 };
 
-const filterArray = (array, predicate) => {
-  return array.filter(predicate);
+const filterMultipleOfThree = array => {
+  return array.filter(num => num % 3 === 0);
 };
 
 const pick = (obj, key) => {
@@ -131,7 +131,7 @@ const renderMessage = (array, params) => {
 
 module.exports = {
   tableToDictList,
-  filterArray,
+  filterMultipleOfThree,
   pick,
   sortDistinct,
   sortBy,
