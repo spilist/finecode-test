@@ -32,10 +32,12 @@ const pickGlossTerm = jsonStr => {
   return _pick(json, "GlossTerm");
 };
 
+// without compare function, it is sorted by converting items into unicode string. Thus, for example, 11 comes before 7.
+// refer to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#Description
 const sortDistinct = array => {
   return array
     .filter((value, index, self) => self.indexOf(value) === index)
-    .sort((a, b) => (a > b ? 1 : -1));
+    .sort((a, b) => a - b);
 };
 
 const sortBy = (array, prop, compareFunc) => {
