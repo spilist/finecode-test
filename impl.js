@@ -103,30 +103,29 @@ class Message {
     this.userId = params.userId;
     this.content = params.content;
   }
+
+  render(currentUserId) {
+    const className = this.userId === currentUserId ? "right" : "left";
+
+    return `<li class="${className}">
+  <img class="profile" src="{{user_image(${this.userId})}}">
+  <div class="message-content">${this.content}</div>
+</li>`;
+  }
 }
 
 class Notice extends Message {
   constructor(content) {
-    super({ userId: 0, content });
+    super({ content });
+  }
+
+  render() {
+    return `<li class="notice">${this.content}</li>`;
   }
 }
 
 const renderMessage = (array, params) => {
-  const currentUserId = params.userId;
-
-  return array
-    .map(item => {
-      if (item.userId === 0) {
-        return `<li class="notice">${item.content}</li>`;
-      } else {
-        const className = item.userId === currentUserId ? "right" : "left";
-
-        return `<li class="${className}"><img class="profile" src="{{user_image(${
-          item.userId
-        })}}"><div class="message-content">${item.content}</div></li>`;
-      }
-    })
-    .join("\n");
+  return array.map(item => item.render(params.userId)).join("\n");
 };
 
 module.exports = {

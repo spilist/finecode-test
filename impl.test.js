@@ -215,10 +215,22 @@ describe("test polymorphism", () => {
 
       expect(impl.renderMessage(messages, { userId: 2 })).toBe(
         `<li class="notice">Welcome to chat</li>
-        <li class="left"><img class="profile" src="{{user_image(1)}}"><div class="message-content">Hello World</div></li>
-        <li class="right"><img class="profile" src="{{user_image(2)}}"><div class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div></li>
-        <li class="left"><img class="profile" src="{{user_image(3)}}"><div class="message-content">안녕하세요.</div></li>
-        <li class="right"><img class="profile" src="{{user_image(2)}}"><div class="message-content">ありがとうございます。</div></li>`
+<li class="left">
+  <img class="profile" src="{{user_image(1)}}">
+  <div class="message-content">Hello World</div>
+</li>
+<li class="right">
+  <img class="profile" src="{{user_image(2)}}">
+  <div class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+</li>
+<li class="left">
+  <img class="profile" src="{{user_image(3)}}">
+  <div class="message-content">안녕하세요.</div>
+</li>
+<li class="right">
+  <img class="profile" src="{{user_image(2)}}">
+  <div class="message-content">ありがとうございます。</div>
+</li>`
       );
     });
   });
