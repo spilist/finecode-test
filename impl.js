@@ -44,15 +44,10 @@ const sortByAmount = array => {
   return array.sort((obj1, obj2) => obj2.amount - obj1.amount);
 };
 
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
-const add = (a, b) => a + b;
-const subtract = (a, b) => a - b;
-
-this.multiply = multiply.bind(this);
-this.divide = divide.bind(this);
-this.add = add.bind(this);
-this.subtract = subtract.bind(this);
+this.multiply = (a, b) => a * b;
+this.divide = (a, b) => a / b;
+this.add = (a, b) => a + b;
+this.subtract = (a, b) => a - b;
 
 const calc = (functionName, ...params) => {
   return this[functionName](...params);
@@ -141,7 +136,7 @@ module.exports = {
   sortDistinct,
   sortByAmount,
   calc,
-  multiply,
+  multiply: this.multiply,
   findDeepestChild,
   findNodesContaningMoreThan,
   countAllChildren,
