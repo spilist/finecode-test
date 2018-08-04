@@ -40,10 +40,8 @@ const sortDistinct = array => {
     .sort((a, b) => a - b);
 };
 
-const sortBy = (array, prop, compareFunc) => {
-  return array.sort(
-    (obj1, obj2) => (compareFunc(obj1[prop], obj2[prop]) ? 1 : -1)
-  );
+const sortByAmount = array => {
+  return array.sort((obj1, obj2) => obj2.amount - obj1.amount);
 };
 
 const multiply = (a, b) => a * b;
@@ -141,7 +139,7 @@ module.exports = {
   filterMultipleOfThree,
   pickGlossTerm,
   sortDistinct,
-  sortBy,
+  sortByAmount,
   calc,
   multiply,
   findDeepestChild,

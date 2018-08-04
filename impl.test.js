@@ -111,8 +111,8 @@ describe("test sorted distinct list", () => {
 });
 
 describe("test custom sort", () => {
-  describe("sortBy(array, property, compareFunc)", () => {
-    it("sorts by object property", () => {
+  describe("sortByAmount(array)", () => {
+    it("sorts array by amount property in decreasing order", () => {
       class Voucher {
         constructor(trader, amount) {
           this.trader = trader;
@@ -127,7 +127,7 @@ describe("test custom sort", () => {
         new Voucher("이마트", 80000)
       ];
 
-      const vouchers = impl.sortBy(data, "amount", (a, b) => a < b);
+      const vouchers = impl.sortByAmount(data);
       expect(vouchers[0].trader).toBe("신세계");
       expect(vouchers[3].trader).toBe("7 Eleven");
     });
