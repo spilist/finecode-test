@@ -57,15 +57,15 @@ const findDeepestChild = tree => {
   const depthCount = [];
   const pushCount = (obj, count) => {
     count += 1;
-    for (let key in obj) {
-      depthCount.push({ name: key, count });
-      if (obj[key] instanceof Object) {
-        pushCount(obj[key], count);
+    for (let name in obj) {
+      depthCount.push({ name, count });
+      if (obj[name] instanceof Object) {
+        pushCount(obj[name], count);
       }
     }
   };
   pushCount(tree, 0);
-  return depthCount.sort((a, b) => (a.count < b.count ? 1 : -1))[0].name;
+  return depthCount.sort((a, b) => b.count - a.count)[0].name;
 };
 
 const findNodesContaningMoreThan = (tree, count) => {
